@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Colors.material" type="Material" id=2]
@@ -7,8 +7,9 @@
 [ext_resource path="res://assets/GunMaterial.material" type="Material" id=5]
 [ext_resource path="res://assets/MuzzleFlash.material" type="Material" id=6]
 [ext_resource path="res://assets/Gun_Emission.material" type="Material" id=7]
-[ext_resource path="res://assets/32-32_white.png" type="Texture" id=8]
-[ext_resource path="res://assets/Titillium-Regular.otf" type="DynamicFontData" id=9]
+[ext_resource path="res://Animation_Player_Manager.gd" type="Script" id=8]
+[ext_resource path="res://assets/32-32_white.png" type="Texture" id=9]
+[ext_resource path="res://assets/Titillium-Regular.otf" type="DynamicFontData" id=10]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 1.2
@@ -857,6 +858,20 @@ tracks/34/loop_wrap = true
 tracks/34/imported = true
 tracks/34/enabled = true
 tracks/34/keys = PoolRealArray( 0, 1, 5.96046e-008, 1.86265e-008, 1.3411e-007, -0.546097, 0.0503074, 0.0508105, 0.834665, 1, 1, 1, 1, 1, 5.96046e-008, 1.86265e-008, 1.3411e-007, -0.546097, 0.0503074, 0.0508105, 0.834665, 1, 1, 1 )
+tracks/35/type = "method"
+tracks/35/path = NodePath("Animation_Player")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "animation_callback"
+} ]
+}
 
 [sub_resource type="Animation" id=10]
 resource_name = "Knife_idle"
@@ -1848,6 +1863,20 @@ tracks/34/loop_wrap = true
 tracks/34/imported = true
 tracks/34/enabled = true
 tracks/34/keys = PoolRealArray( 0, 1, 1.54972e-006, -9.574e-007, -5.1409e-007, 0.00332353, -0.0589074, 0.159316, 0.985463, 1, 1, 1, 0.0666667, 1, 1.54972e-006, -9.574e-007, -5.1409e-007, -0.0508508, -0.0403509, 0.175271, 0.982378, 1, 1, 1, 0.133333, 1, 1.54972e-006, -9.574e-007, -5.1409e-007, -0.131989, -0.0121728, 0.198097, 0.971179, 1, 1, 1, 0.2, 1, 1.54972e-006, -9.574e-007, -5.1409e-007, -0.131989, -0.0121728, 0.198097, 0.971179, 1, 1, 1, 0.266667, 1, 2.98023e-007, -1.09337e-006, 1.78814e-007, -0.0508508, -0.0403509, 0.175271, 0.982378, 1, 1, 1, 0.333333, 1, -1.78814e-007, -9.46224e-007, 8.9407e-008, 0.00332355, -0.0589073, 0.159316, 0.985463, 1, 1, 1, 0.666667, 1, 1.54972e-006, -9.574e-007, -5.1409e-007, 0.00332353, -0.0589074, 0.159316, 0.985463, 1, 1, 1 )
+tracks/35/type = "method"
+tracks/35/path = NodePath("Animation_Player")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "animation_callback"
+} ]
+}
 
 [sub_resource type="Animation" id=14]
 length = 0.0416667
@@ -3086,6 +3115,20 @@ tracks/34/loop_wrap = true
 tracks/34/imported = true
 tracks/34/enabled = true
 tracks/34/keys = PoolRealArray( 0, 1, 1.01328e-006, -7.3202e-007, -4.39584e-007, 0.279726, 0.0140126, -0.0783186, 0.956778, 1, 1, 1, 0.0666667, 1, 1.01328e-006, -7.3202e-007, -4.39584e-007, 0.247226, 0.0556837, -0.0586789, 0.965575, 1, 1, 1, 0.133333, 1, 1.01328e-006, -7.3202e-007, -4.39584e-007, 0.196831, 0.118012, -0.0287827, 0.972884, 1, 1, 1, 0.2, 1, 1.01328e-006, -7.3202e-007, -4.39584e-007, 0.186236, 0.130784, -0.0225779, 0.9735, 1, 1, 1, 0.4, 1, 3.57628e-007, -8.41916e-007, -1.86265e-007, 0.186236, 0.130784, -0.0225779, 0.9735, 1, 1, 1, 0.466667, 1, -4.76837e-007, -1.02445e-006, 2.38419e-007, 0.187942, 0.128735, -0.0235749, 0.973422, 1, 1, 1, 0.533333, 1, 2.68221e-007, -9.22009e-007, 8.19564e-008, 0.213845, 0.0972654, -0.038804, 0.971238, 1, 1, 1, 0.6, 1, 7.15256e-007, -7.59959e-007, -2.90573e-007, 0.257967, 0.0420454, -0.0651371, 0.963038, 1, 1, 1, 0.666667, 1, 1.01328e-006, -7.3202e-007, -4.39584e-007, 0.279726, 0.0140126, -0.0783186, 0.956778, 1, 1, 1 )
+tracks/35/type = "method"
+tracks/35/path = NodePath("Animation_Player")
+tracks/35/interp = 1
+tracks/35/loop_wrap = true
+tracks/35/imported = false
+tracks/35/enabled = true
+tracks/35/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "animation_callback"
+} ]
+}
 
 [sub_resource type="Animation" id=19]
 length = 0.0416667
@@ -3845,7 +3888,7 @@ anti_aliasing = false
 [sub_resource type="DynamicFont" id=25]
 size = 42
 use_filter = true
-font_data = ExtResource( 9 )
+font_data = ExtResource( 10 )
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -4064,6 +4107,7 @@ anims/Rifle_fire = SubResource( 18 )
 anims/Rifle_idle = SubResource( 19 )
 anims/Rifle_reload = SubResource( 20 )
 anims/Rifle_unequip = SubResource( 21 )
+script = ExtResource( 8 )
 
 [node name="Camera" type="Camera" parent="Rotation_Helper"]
 transform = Transform( -1, 0, 3.25841e-007, 0, 1, 0, -3.25841e-007, 0, -1, 0, -0.307539, -0.0646362 )
@@ -4142,7 +4186,7 @@ margin_left = -2.5
 margin_top = 4.5
 margin_right = 2.5
 margin_bottom = 20.5
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 expand = true
 
 [node name="Top_IMG" type="TextureRect" parent="HUD/Crosshair"]
@@ -4154,7 +4198,7 @@ margin_left = -2.5
 margin_top = -20.5
 margin_right = 2.5
 margin_bottom = -4.5
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 expand = true
 
 [node name="Left_IMG" type="TextureRect" parent="HUD/Crosshair"]
@@ -4167,7 +4211,7 @@ margin_top = -2.5
 margin_right = 0.5
 margin_bottom = 12.5
 rect_rotation = 90.0
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 expand = true
 
 [node name="Right_IMG" type="TextureRect" parent="HUD/Crosshair"]
@@ -4180,7 +4224,7 @@ margin_top = -2.5
 margin_right = 24.5
 margin_bottom = 12.5
 rect_rotation = 90.0
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 expand = true
 
 [node name="Panel" type="Panel" parent="HUD"]

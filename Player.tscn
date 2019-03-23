@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/Colors.material" type="Material" id=2]
@@ -8,9 +8,11 @@
 [ext_resource path="res://assets/MuzzleFlash.material" type="Material" id=6]
 [ext_resource path="res://assets/Gun_Emission.material" type="Material" id=7]
 [ext_resource path="res://Animation_Player_Manager.gd" type="Script" id=8]
-[ext_resource path="res://Weapon_Pistol.gd" type="Script" id=9]
-[ext_resource path="res://assets/32-32_white.png" type="Texture" id=10]
-[ext_resource path="res://assets/Titillium-Regular.otf" type="DynamicFontData" id=11]
+[ext_resource path="res://Weapon_Rifle.gd" type="Script" id=9]
+[ext_resource path="res://Weapon_Knife.gd" type="Script" id=10]
+[ext_resource path="res://Weapon_Pistol.gd" type="Script" id=11]
+[ext_resource path="res://assets/32-32_white.png" type="Texture" id=12]
+[ext_resource path="res://assets/Titillium-Regular.otf" type="DynamicFontData" id=13]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 1.2
@@ -3889,7 +3891,7 @@ anti_aliasing = false
 [sub_resource type="DynamicFont" id=25]
 size = 42
 use_filter = true
-font_data = ExtResource( 11 )
+font_data = ExtResource( 13 )
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -4120,14 +4122,16 @@ far = 180.0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12.3914, 0 )
 
 [node name="Rifle_Point" type="Spatial" parent="Rotation_Helper/Gun_Fire_Points"]
+editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.163315, 10.4607, 7.04431 )
+script = ExtResource( 9 )
 
 [node name="Ray_Cast" type="RayCast" parent="Rotation_Helper/Gun_Fire_Points/Rifle_Point"]
 cast_to = Vector3( 0, 0, 80 )
 
 [node name="Knife_Point" type="Spatial" parent="Rotation_Helper/Gun_Fire_Points"]
-editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.163315, 10.4607, 2.54082 )
+script = ExtResource( 10 )
 
 [node name="Area" type="Area" parent="Rotation_Helper/Gun_Fire_Points/Knife_Point"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.17163, 1.26893 )
@@ -4138,7 +4142,7 @@ shape = SubResource( 22 )
 
 [node name="Pistol_Point" type="Spatial" parent="Rotation_Helper/Gun_Fire_Points"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.436506, 11.3604, 4.77607 )
-script = ExtResource( 9 )
+script = ExtResource( 11 )
 
 [node name="Gun_Aim_Point" type="Spatial" parent="Rotation_Helper"]
 editor/display_folded = true
@@ -4186,7 +4190,7 @@ margin_left = -2.5
 margin_top = 4.5
 margin_right = 2.5
 margin_bottom = 20.5
-texture = ExtResource( 10 )
+texture = ExtResource( 12 )
 expand = true
 
 [node name="Top_IMG" type="TextureRect" parent="HUD/Crosshair"]
@@ -4198,7 +4202,7 @@ margin_left = -2.5
 margin_top = -20.5
 margin_right = 2.5
 margin_bottom = -4.5
-texture = ExtResource( 10 )
+texture = ExtResource( 12 )
 expand = true
 
 [node name="Left_IMG" type="TextureRect" parent="HUD/Crosshair"]
@@ -4211,7 +4215,7 @@ margin_top = -2.5
 margin_right = 0.5
 margin_bottom = 12.5
 rect_rotation = 90.0
-texture = ExtResource( 10 )
+texture = ExtResource( 12 )
 expand = true
 
 [node name="Right_IMG" type="TextureRect" parent="HUD/Crosshair"]
@@ -4224,18 +4228,21 @@ margin_top = -2.5
 margin_right = 24.5
 margin_bottom = 12.5
 rect_rotation = 90.0
-texture = ExtResource( 10 )
+texture = ExtResource( 12 )
 expand = true
 
 [node name="Panel" type="Panel" parent="HUD"]
-editor/display_folded = true
 modulate = Color( 1, 1, 1, 0.705882 )
-margin_top = 560.0
-margin_right = 370.0
-margin_bottom = 720.0
+margin_left = -3.0
+margin_top = 441.0
+margin_right = 367.0
+margin_bottom = 601.0
 custom_styles/panelf = SubResource( 24 )
 custom_styles/panel = SubResource( 24 )
 custom_styles/panelnc = SubResource( 24 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Panel_border" type="Panel" parent="HUD/Panel"]
 modulate = Color( 0.679688, 0.679688, 0.679688, 1 )

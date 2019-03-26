@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://RigidBody_hit_test.gd" type="Script" id=2]
 
 [sub_resource type="PlaneMesh" id=1]
 size = Vector2( 80, 80 )
@@ -172,13 +173,13 @@ material/0 = SubResource( 5 )
 environment = SubResource( 7 )
 
 [node name="Cubes" type="Spatial" parent="."]
-editor/display_folded = true
 
 [node name="PurpleCube" type="RigidBody" parent="Cubes"]
 editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.95316, 23.1277 )
 mass = 5.0
 gravity_scale = 3.0
+script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Cubes/PurpleCube"]
 shape = SubResource( 8 )
@@ -192,6 +193,7 @@ editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.23405, 9.95316, 23.1277 )
 mass = 5.0
 gravity_scale = 3.0
+script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Cubes/PurpleCube2"]
 shape = SubResource( 8 )
@@ -205,6 +207,7 @@ editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.85143, 9.95316, 23.1277 )
 mass = 5.0
 gravity_scale = 3.0
+script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Cubes/PurpleCube3"]
 shape = SubResource( 8 )
@@ -218,6 +221,7 @@ editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.85143, 17.1576, 23.1277 )
 mass = 5.0
 gravity_scale = 3.0
+script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Cubes/PurpleCube4"]
 shape = SubResource( 8 )
@@ -231,6 +235,7 @@ editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.85143, 24.1593, 23.1277 )
 mass = 5.0
 gravity_scale = 3.0
+script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Cubes/PurpleCube5"]
 shape = SubResource( 8 )
@@ -244,6 +249,7 @@ editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.451504, 17.9137, 23.1277 )
 mass = 5.0
 gravity_scale = 3.0
+script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Cubes/PurpleCube6"]
 shape = SubResource( 8 )
@@ -258,6 +264,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.95316, -21.6551 )
 mass = 5.0
 physics_material_override = SubResource( 11 )
 gravity_scale = 3.0
+script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Cubes/GreenCube"]
 shape = SubResource( 8 )
@@ -271,6 +278,7 @@ editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.79916, 9.95316, -21.6551 )
 mass = 5.0
 physics_material_override = SubResource( 13 )
+script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Cubes/GreenCube2"]
 shape = SubResource( 8 )
@@ -285,6 +293,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.58552, 9.95316, -21.6551 )
 mass = 5.0
 physics_material_override = SubResource( 14 )
 gravity_scale = 3.0
+script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Cubes/GreenCube3"]
 shape = SubResource( 8 )
@@ -299,6 +308,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.79556, 17.3734, -21.6551 )
 mass = 5.0
 physics_material_override = SubResource( 15 )
 gravity_scale = 3.0
+script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Cubes/GreenCube4"]
 shape = SubResource( 8 )
@@ -313,6 +323,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.51582, 17.3734, -21.6551 )
 mass = 5.0
 physics_material_override = SubResource( 16 )
 gravity_scale = 3.0
+script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Cubes/GreenCube5"]
 shape = SubResource( 8 )
@@ -327,6 +338,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.602769, 24.9266, -21.6551 )
 mass = 3.0
 physics_material_override = SubResource( 17 )
 gravity_scale = 3.0
+script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Cubes/GreenCube6"]
 shape = SubResource( 8 )

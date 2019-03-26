@@ -4130,6 +4130,7 @@ script = ExtResource( 9 )
 cast_to = Vector3( 0, 0, 80 )
 
 [node name="Knife_Point" type="Spatial" parent="Rotation_Helper/Gun_Fire_Points"]
+editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.163315, 10.4607, 2.54082 )
 script = ExtResource( 10 )
 
@@ -4141,7 +4142,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.300034 )
 shape = SubResource( 22 )
 
 [node name="Pistol_Point" type="Spatial" parent="Rotation_Helper/Gun_Fire_Points"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.436506, 11.3604, 4.77607 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.436506, 11.4021, 4.9077 )
 script = ExtResource( 11 )
 
 [node name="Gun_Aim_Point" type="Spatial" parent="Rotation_Helper"]

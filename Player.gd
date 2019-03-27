@@ -12,6 +12,7 @@ var reloading_weapon = false
 
 var simple_audio_player = preload("res://Simple_Audio_Player.tscn")
 
+const MAX_HEALTH = 150
 var health = 100
 
 var UI_status_label
@@ -337,6 +338,10 @@ func _input(event):
 		camera_rot.x = clamp(camera_rot.x, -70, 70)
 		rotation_helper.rotation_degrees = camera_rot
 		
+func add_health(additional_health):
+	health += additional_health
+	health = clamp(health, 0, MAX_HEALTH)
+	
 func fire_bullet():
 	if changing_weapon == true:
 		return

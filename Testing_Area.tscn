@@ -173,6 +173,7 @@ material/0 = SubResource( 5 )
 environment = SubResource( 7 )
 
 [node name="Cubes" type="Spatial" parent="."]
+editor/display_folded = true
 
 [node name="PurpleCube" type="RigidBody" parent="Cubes"]
 editor/display_folded = true

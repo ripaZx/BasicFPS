@@ -342,6 +342,11 @@ func add_health(additional_health):
 	health += additional_health
 	health = clamp(health, 0, MAX_HEALTH)
 	
+func add_ammo(additional_ammo):
+	if (current_weapon_name != "DISARMATO"):
+		if (weapons[current_weapon_name].CAN_REFILL == true):
+			weapons[current_weapon_name].spare_ammo += weapons[current_weapon_name].AMMO_IN_MAG * additional_ammo
+	
 func fire_bullet():
 	if changing_weapon == true:
 		return

@@ -10,6 +10,13 @@ var changing_weapon = false
 var changing_weapon_name = "DISARMATO"
 var reloading_weapon = false
 
+var grenade_amounts = {"Grenade":2, "Sticky Grenade": 2}
+const MAX_GRENADE = 5
+var current_grenade = "Grenade"
+var grenade_scene = preload("res://Grenade.tscn")
+var sticky_grenade_scene = preload("res://Sticky_Grenade.tscn")
+const GRENADE_THROW_FORCE = 50
+
 var simple_audio_player = preload("res://Simple_Audio_Player.tscn")
 
 const MAX_HEALTH = 150
@@ -184,6 +191,28 @@ func process_input():
 						if animation_manager.current_state == current_weapon.IDLE_ANIM_NAME:
 							animation_manager.set_animation(current_weapon.FIRE_ANIM_NAME)
 	
+	# Cambio granate e lancio
+	if Input.is_action_pressed("cambio_granata"):
+		if current_grenade == "Grenade":
+			current_grenade = "Sticky Grenade"
+		elif current_grenade == "Sticky Grenade":
+			current_grenade = "Grenade"
+		
+	if Input.is_action_pressed("lancio_granata"):
+		if grenade_amounts[current_grenade] > 0:
+			grenade_amounts[current_grenade] -= 1
+			
+			var grenade_clone
+			if current_grenade == "Grenade":
+				grenade_clone = grenade_scene.instance()
+			elif current_grenade == "Sticky Grenade":
+				grenade_clone = sticky_grenade_scene.instance()
+				grenade_clone.player_body = self
+			
+			get_tree().root.add_child(grenade_clone)
+			grenade_clone.global_transform = $Rotation_Helper/Grenade_Toss_Pos.global_transform
+			grenade_clone.apply_impulse(Vector3(0, 0, 0), grenade_clone.global_transform.basis.z * GRENADE_THROW_FORCE)
+			
 	# Torcia
 	if Input.is_action_pressed("torcia"):
 		if flashlight.is_visible_in_tree():
@@ -307,7 +336,8 @@ func process_UI(delta):
 	else:
 		var current_weapon = weapons[current_weapon_name]
 		UI_status_label.text = "VITA: " + str(health) + \
-		"\nAMMO: " + str(current_weapon.ammo_in_weapon) + "/" + str(current_weapon.spare_ammo)
+		"\nAMMO: " + str(current_weapon.ammo_in_weapon) + "/" + str(current_weapon.spare_ammo) + \
+		"\n" + current_grenade + ": " + str(grenade_amounts[current_grenade])
 	
 func _input(event):
 	
@@ -347,6 +377,9 @@ func add_ammo(additional_ammo):
 		if (weapons[current_weapon_name].CAN_REFILL == true):
 			weapons[current_weapon_name].spare_ammo += weapons[current_weapon_name].AMMO_IN_MAG * additional_ammo
 	
+func add_grenade(additional_grenade):
+	grenade_amounts[current_grenade] += additional_grenade
+	grenade_amounts[current_grenade] = clamp(grenade_amounts[current_grenade], 0, MAX_GRENADE)
 func fire_bullet():
 	if changing_weapon == true:
 		return

@@ -178,7 +178,7 @@ func process_input():
 							reloading_weapon = true
 	
 	# Prendere e tirare oggetti
-	if Input.is_action_pressed("fuoco") and current_weapon_name == "DISARMATO":
+	if Input.is_action_just_pressed("fuoco") and current_weapon_name == "DISARMATO":
 		if grabbed_object == null:
 			var state = get_world().direct_space_state
 			
@@ -187,7 +187,7 @@ func process_input():
 			var ray_to = ray_from + camera.project_ray_normal(center_position) * OBJECT_GRAB_RAY_DISTANCE
 			
 			var ray_result = state.intersect_ray(ray_from, ray_to, [self, $Rotation_Helper/Gun_Fire_Points/Knife_Point/Area])
-			if ray_result != null:
+			if !ray_result.empty():
 				if ray_result["collider"] is RigidBody:
 					grabbed_object = ray_result["collider"]
 					grabbed_object.mode = RigidBody.MODE_STATIC

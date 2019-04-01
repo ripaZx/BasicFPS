@@ -192,13 +192,13 @@ func process_input():
 							animation_manager.set_animation(current_weapon.FIRE_ANIM_NAME)
 	
 	# Cambio granate e lancio
-	if Input.is_action_pressed("cambio_granata"):
+	if Input.is_action_just_pressed("cambio_granata"):
 		if current_grenade == "Grenade":
 			current_grenade = "Sticky Grenade"
 		elif current_grenade == "Sticky Grenade":
 			current_grenade = "Grenade"
 		
-	if Input.is_action_pressed("lancio_granata"):
+	if Input.is_action_just_pressed("lancio_granata"):
 		if grenade_amounts[current_grenade] > 0:
 			grenade_amounts[current_grenade] -= 1
 			

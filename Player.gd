@@ -17,6 +17,11 @@ var grenade_scene = preload("res://Grenade.tscn")
 var sticky_grenade_scene = preload("res://Sticky_Grenade.tscn")
 const GRENADE_THROW_FORCE = 50
 
+var grabbed_object = null
+const OBJECT_THROW_FORCE = 120
+const OBJECT_GRAB_DISTANCE = 8
+const OBJECT_GRAB_RAY_DISTANCE = 10
+
 var simple_audio_player = preload("res://Simple_Audio_Player.tscn")
 
 const MAX_HEALTH = 150
@@ -83,8 +88,10 @@ func _physics_process(delta):
 	process_input()
 	process_view_input(delta)
 	process_movement(delta)
-	process_changing_weapons(delta)
-	process_reloading(delta)
+	if grabbed_object == null:
+		process_changing_weapons(delta)
+		process_reloading(delta)
+	
 	process_UI(delta)
 	
 # Vengono processati gli input
@@ -170,6 +177,37 @@ func process_input():
 						if is_reloading == false:
 							reloading_weapon = true
 	
+	# Prendere e tirare oggetti
+	if Input.is_action_pressed("fuoco") and current_weapon_name == "DISARMATO":
+		if grabbed_object == null:
+			var state = get_world().direct_space_state
+			
+			var center_position = get_viewport().size / 2
+			var ray_from = camera.project_ray_origin(center_position)
+			var ray_to = ray_from + camera.project_ray_normal(center_position) * OBJECT_GRAB_RAY_DISTANCE
+			
+			var ray_result = state.intersect_ray(ray_from, ray_to, [self, $Rotation_Helper/Gun_Fire_Points/Knife_Point/Area])
+			if ray_result != null:
+				if ray_result["collider"] is RigidBody:
+					grabbed_object = ray_result["collider"]
+					grabbed_object.mode = RigidBody.MODE_STATIC
+					
+					grabbed_object.collision_layer = 0
+					grabbed_object.collision_mask = 0
+					
+		else:
+			grabbed_object.mode = RigidBody.MODE_RIGID
+			
+			grabbed_object.apply_impulse(Vector3(0, 0, 0), -camera.global_transform.basis.z.normalized() * OBJECT_THROW_FORCE)
+			
+			grabbed_object.collision_layer = 1
+			grabbed_object.collision_mask = 1
+			
+			grabbed_object = null
+		
+	if grabbed_object != null:
+		grabbed_object.global_transform.origin = camera.global_transform.origin + ( -camera.global_transform.basis.z.normalized() * OBJECT_GRAB_DISTANCE)
+		
 	# Sprint
 	if Input.is_action_pressed("movimento_sprint"):
 		is_sprinting = true
@@ -367,7 +405,10 @@ func _input(event):
 		var camera_rot = rotation_helper.rotation_degrees
 		camera_rot.x = clamp(camera_rot.x, -70, 70)
 		rotation_helper.rotation_degrees = camera_rot
-		
+	
+func bullet_hit(damage, bullet_hit_pos):
+	health -= damage
+	
 func add_health(additional_health):
 	health += additional_health
 	health = clamp(health, 0, MAX_HEALTH)

@@ -259,11 +259,8 @@ func process_input():
 			flashlight.show()
 	
 	# Catturare/liberare il cursore del mouse
-	if Input.is_action_pressed("ui_cancel"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 func process_view_input(delta):
 	

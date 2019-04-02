@@ -1,14 +1,15 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://assets/lightblue_equirectangular.png" type="Texture" id=1]
-[ext_resource path="res://assets/Titillium-Regular.otf" type="DynamicFontData" id=2]
-[ext_resource path="res://FPS_project_icon.png" type="Texture" id=3]
-[ext_resource path="res://assets/Space_Level_Objects/SpaceThumbnail.png" type="Texture" id=4]
-[ext_resource path="res://assets/Ruin_Level_Objects/RuinsThumbnail.png" type="Texture" id=5]
+[ext_resource path="res://Main_Menu.gd" type="Script" id=1]
+[ext_resource path="res://assets/lightblue_equirectangular.png" type="Texture" id=2]
+[ext_resource path="res://assets/Titillium-Regular.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://FPS_project_icon.png" type="Texture" id=4]
+[ext_resource path="res://assets/Space_Level_Objects/SpaceThumbnail.png" type="Texture" id=5]
+[ext_resource path="res://assets/Ruin_Level_Objects/RuinsThumbnail.png" type="Texture" id=6]
 
 [sub_resource type="PanoramaSky" id=1]
 radiance_size = 0
-panorama = ExtResource( 1 )
+panorama = ExtResource( 2 )
 
 [sub_resource type="Environment" id=2]
 background_mode = 2
@@ -57,11 +58,17 @@ corner_radius_bottom_left = 10
 [sub_resource type="DynamicFont" id=5]
 size = 32
 use_filter = true
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
 
 [node name="Main_Menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -1.0
+margin_right = -1.0
+script = ExtResource( 1 )
+testing_area_scene = "res://Testing_Area.tscn"
+space_level_scene = "res://assets/Space_Level_Objects/Space_Level.tscn"
+ruins_level_scene = "res://assets/Ruin_Level_Objects/Ruins_Level.tscn"
 
 [node name="Background_Animation" type="Spatial" parent="."]
 
@@ -77,10 +84,9 @@ playback_speed = 0.18
 anims/Background_Animation = SubResource( 3 )
 
 [node name="Start_Menu" type="Panel" parent="."]
-editor/display_folded = true
 modulate = Color( 1, 1, 1, 0.901961 )
-margin_right = 330.0
-margin_bottom = 720.0
+margin_right = 325.0
+margin_bottom = 600.0
 custom_styles/panelf = SubResource( 4 )
 custom_styles/panel = SubResource( 4 )
 custom_styles/panelnc = SubResource( 4 )
@@ -202,7 +208,7 @@ margin_left = -60.0
 margin_top = -60.0
 margin_right = 60.0
 margin_bottom = 60.0
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 expand = true
 
 [node name="Button_Level_Space" type="Button" parent="Level_Select_Menu"]
@@ -223,7 +229,7 @@ margin_left = -60.0
 margin_top = -60.0
 margin_right = 60.0
 margin_bottom = 60.0
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 expand = true
 
 [node name="Button_Level_Ruins" type="Button" parent="Level_Select_Menu"]
@@ -244,7 +250,7 @@ margin_left = -60.0
 margin_top = -60.0
 margin_right = 60.0
 margin_bottom = 60.0
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 expand = true
 
 [node name="Options_Menu" type="Panel" parent="."]
@@ -289,6 +295,7 @@ min_value = 0.001
 max_value = 0.4
 step = 0.004
 value = 0.012
+ticks_on_borders = true
 
 [node name="Label_Joypad_Sensitivity" type="Label" parent="Options_Menu"]
 margin_top = 190.0

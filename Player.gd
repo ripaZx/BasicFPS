@@ -2,6 +2,16 @@ extends KinematicBody
 
 var animation_manager
 
+# HP e respawn
+const RESPAWN_TIME = 4
+var dead_time = 0
+var is_dead = false
+const MAX_HEALTH = 150
+var health = 100
+
+var globals
+
+# Armi
 var current_weapon_name = "DISARMATO"
 var weapons = {"DISARMATO":null, "COLTELLO":null, "PISTOLA":null, "FUCILE":null}
 const WEAPON_NUMBER_TO_NAME = {0:"DISARMATO", 1:"COLTELLO", 2:"PISTOLA", 3:"FUCILE"}
@@ -10,6 +20,7 @@ var changing_weapon = false
 var changing_weapon_name = "DISARMATO"
 var reloading_weapon = false
 
+# Granate
 var grenade_amounts = {"Grenade":2, "Sticky Grenade": 2}
 const MAX_GRENADE = 5
 var current_grenade = "Grenade"
@@ -17,6 +28,7 @@ var grenade_scene = preload("res://Grenade.tscn")
 var sticky_grenade_scene = preload("res://Sticky_Grenade.tscn")
 const GRENADE_THROW_FORCE = 50
 
+# Acchiappa oggetti
 var grabbed_object = null
 const OBJECT_THROW_FORCE = 120
 const OBJECT_GRAB_DISTANCE = 8
@@ -24,11 +36,9 @@ const OBJECT_GRAB_RAY_DISTANCE = 10
 
 var simple_audio_player = preload("res://Simple_Audio_Player.tscn")
 
-const MAX_HEALTH = 150
-var health = 100
-
 var UI_status_label
 
+# Movimento e fisica
 const GRAVITY = -24.8
 var vel = Vector3()
 const MAX_SPEED = 25
@@ -48,6 +58,7 @@ const MAX_SLOPE_ANGLE = 40
 var camera
 var rotation_helper
 
+# Inputs
 var mouse_scroll_value = 0
 const MOUSE_SENSITIVITY_SCROLL_WHEEL = 0.08
 var JOYPAD_SENSITIVITY = 2
@@ -57,7 +68,8 @@ var MOUSE_SENSITIVITY = 0.05
 # Chiamato quando il nodo entra nella scena per la prima volta
 func _ready():
 	
-	# Prendo i nodi della camera, del rotation_helper e della torcia e li salvo nelle rispettive variabili
+	globals = get_node("/root/Globals")
+	global_transform.origin = globals.get_respawn_position()
 	camera = $Rotation_Helper/Camera
 	rotation_helper = $Rotation_Helper
 	flashlight = $Rotation_Helper/Flashlight
@@ -85,14 +97,18 @@ func _ready():
 	UI_status_label = $HUD/Panel/Gun_label
 	
 func _physics_process(delta):
-	process_input()
-	process_view_input(delta)
-	process_movement(delta)
+	
+	if !is_dead:
+		process_input()
+		process_view_input(delta)
+		process_movement(delta)
+		
 	if grabbed_object == null:
 		process_changing_weapons(delta)
 		process_reloading(delta)
 	
 	process_UI(delta)
+	process_respawn(delta)
 	
 # Vengono processati gli input
 func process_input():
@@ -374,8 +390,64 @@ func process_UI(delta):
 		"\nAMMO: " + str(current_weapon.ammo_in_weapon) + "/" + str(current_weapon.spare_ammo) + \
 		"\n" + current_grenade + ": " + str(grenade_amounts[current_grenade])
 	
+func process_respawn(delta):
+	if health <= 0 and !is_dead:
+		$Body_CollisionShape.disabled = true
+		$Feet_CollisionShape.disabled = true
+		
+		changing_weapon = true
+		changing_weapon_name = "DISARMATO"
+		
+		$HUD/Death_Screen.visible = true
+		
+		$HUD/Panel.visible = false
+		$HUD/Crosshair.visible = false
+		
+		dead_time = RESPAWN_TIME
+		is_dead = true
+		
+		if grabbed_object != null:
+			grabbed_object.mode = RigidBody.MODE_RIGID
+			grabbed_object.apply_impulse(Vector3(0, 0, 0), -camera.global_transform.basis.z.normalized() * OBJECT_THROW_FORCE / 2)
+			
+			grabbed_object.collision_layer = 1
+			grabbed_object.collision_mask = 1
+			
+			grabbed_object = null
+			
+	if is_dead:
+		dead_time -= delta
+		
+		var dead_time_pretty = str(dead_time).left(3)
+		$HUD/Death_Screen/Label.text = "Sei morto\n" + dead_time_pretty + " secondi per il respawn"
+		
+		if dead_time <= 0:
+			global_transform.origin = globals.get_respawn_position()
+			
+			$Body_CollisionShape.disabled = false
+			$Feet_CollisionShape.disabled = false
+			
+			$HUD/Death_Screen.visible = false
+			
+			$HUD/Panel.visible = true
+			$HUD/Crosshair.visible = true
+			
+			for weapon in weapons:
+				var weapon_node = weapons[weapon]
+				if weapon_node != null:
+					weapon_node.reset_weapon()
+					
+			health = 100
+			grenade_amounts = {"Grenade":2, "Sticky Grenade":2}
+			current_grenade = "Grenade"
+			
+			is_dead = false
+	
 func _input(event):
 	
+	if is_dead:
+		return
+		
 	if event is InputEventMouseButton and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event.button_index == BUTTON_WHEEL_UP or event.button_index == BUTTON_WHEEL_DOWN:
 			if event.button_index == BUTTON_WHEEL_UP:

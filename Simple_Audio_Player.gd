@@ -19,6 +19,10 @@ func play_sound(audio_stream, position = null):
 		return
 		
 	audio_node.stream = audio_stream
+	
+	if position != null:
+		audio_node.global_transform.origin = position
+	
 	audio_node.play(0.0)
 	
 func sound_finished():

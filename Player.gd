@@ -34,8 +34,6 @@ const OBJECT_THROW_FORCE = 120
 const OBJECT_GRAB_DISTANCE = 8
 const OBJECT_GRAB_RAY_DISTANCE = 10
 
-var simple_audio_player = preload("res://Simple_Audio_Player.tscn")
-
 var UI_status_label
 
 # Movimento e fisica
@@ -497,7 +495,4 @@ func fire_bullet():
 	weapons[current_weapon_name].fire_weapon()
 	
 func create_sound(sound_name, position = null):
-	var audio_clone = simple_audio_player.instance()
-	var scene_root = get_tree().root.get_children()[0]
-	scene_root.add_child(audio_clone)
-	audio_clone.play_sound(sound_name, position)
+	globals.play_sound(sound_name, false, position)

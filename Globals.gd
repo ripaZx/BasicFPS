@@ -3,6 +3,15 @@ extends Node
 var mouse_sensitivity = 0.98
 var joypad_sensitivity = 2
 
+var audio_clips = {
+	"Pistol_shot": preload("res://assets/Audio/pistol_shot.wav"),
+	"Rifle_shot": preload("res://assets/Audio/rifle_shot.wav"),
+	"Gun_cock": preload("res://assets/Audio/gun_cock.wav")
+}
+
+const SIMPLE_AUDIO_PLAYER_SCENE = preload("res://Simple_Audio_Player.tscn")
+var created_audio = []
+
 var respawn_points = null
 
 const MAIN_MENU_PATH = "res://Main_Menu.tscn"
@@ -39,6 +48,11 @@ func load_new_scene(new_scene_path):
 	get_tree().change_scene(new_scene_path)
 	respawn_points = null
 	
+	for sound in created_audio:
+		if (sound != null):
+			sound.queue_free()
+	created_audio.clear()
+	
 func set_debug_display(display_on):
 	if display_on == false:
 		if debug_display != null:
@@ -73,3 +87,15 @@ func get_respawn_position():
 	else:
 		var respawn_point = rand_range(0, respawn_points.size() -1)
 		return respawn_points[respawn_point].global_transform.origin
+	
+func play_sound(sound_name, loop_sound = false, sound_position = null):
+	if audio_clips.has(sound_name):
+		var new_audio = SIMPLE_AUDIO_PLAYER_SCENE.instance()
+		new_audio.should_loop = loop_sound
+		
+		add_child(new_audio)
+		created_audio.append(new_audio)
+		
+		new_audio.play_sound(audio_clips[sound_name], sound_position)
+	else:
+		print("ERRORE: non è possibile riprodurre audio non incluso in audio_clips!")

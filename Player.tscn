@@ -4116,7 +4116,7 @@ script = ExtResource( 8 )
 transform = Transform( -1, 0, 3.25841e-007, 0, 1, 0, -3.25841e-007, 0, -1, 0, -0.307539, -0.0646362 )
 current = true
 fov = 90.0
-far = 180.0
+far = 400.0
 
 [node name="Gun_Fire_Points" type="Spatial" parent="Rotation_Helper"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12.3914, 0 )

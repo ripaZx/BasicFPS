@@ -4233,10 +4233,10 @@ expand = true
 
 [node name="Panel" type="Panel" parent="HUD"]
 modulate = Color( 1, 1, 1, 0.705882 )
-margin_left = -3.0
-margin_top = 441.0
-margin_right = 367.0
-margin_bottom = 601.0
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -160.0
+margin_right = 370.0
 custom_styles/panelf = SubResource( 24 )
 custom_styles/panel = SubResource( 24 )
 custom_styles/panelnc = SubResource( 24 )

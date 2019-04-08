@@ -4130,6 +4130,7 @@ script = ExtResource( 9 )
 cast_to = Vector3( 0, 0, 80 )
 
 [node name="Knife_Point" type="Spatial" parent="Rotation_Helper/Gun_Fire_Points"]
+editor/display_folded = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.163315, 10.4607, 2.54082 )
 script = ExtResource( 10 )
 
@@ -4240,9 +4241,6 @@ margin_right = 370.0
 custom_styles/panelf = SubResource( 24 )
 custom_styles/panel = SubResource( 24 )
 custom_styles/panelnc = SubResource( 24 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Panel_border" type="Panel" parent="HUD/Panel"]
 modulate = Color( 0.679688, 0.679688, 0.679688, 1 )
@@ -4268,13 +4266,13 @@ Ammo: 000/000
 
 [node name="Death_Screen" type="ColorRect" parent="HUD"]
 visible = false
-margin_right = 1280.0
-margin_bottom = 720.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 color = Color( 0.140625, 0.140625, 0.140625, 0.901961 )
 
 [node name="Label" type="Label" parent="HUD/Death_Screen"]
-margin_right = 1280.0
-margin_bottom = 720.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 custom_fonts/font = SubResource( 25 )
 text = "You died
 0.00 seconds till respawn"

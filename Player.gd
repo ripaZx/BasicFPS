@@ -37,6 +37,7 @@ const OBJECT_GRAB_RAY_DISTANCE = 10
 var UI_status_label
 
 # Movimento e fisica
+# Movimento Quake 3 per rif --------> https://github.com/id-Software/Quake-III-Arena/blob/master/code/game/bg_pmove.c 
 const GRAVITY = -24.8
 var vel = Vector3()
 const MAX_SPEED = 25
@@ -88,7 +89,7 @@ func _ready():
 			weapon_node.player_node = self
 			weapon_node.look_at(gun_aim_point_pos, Vector3(0, 1, 0))
 			weapon_node.rotate_object_local(Vector3(0, 1, 0), deg2rad(180))
-			
+		
 	current_weapon_name = "DISARMATO"
 	changing_weapon_name = "DISARMATO"
 	

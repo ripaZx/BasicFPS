@@ -36,12 +36,11 @@ const OBJECT_GRAB_RAY_DISTANCE = 10
 
 var UI_status_label
 
-# Movimento e fisica
-# Movimento Quake 3 per rif --------> https://github.com/id-Software/Quake-III-Arena/blob/master/code/game/bg_pmove.c 
+# Movimento e fisica 
 const GRAVITY = -24.8
 var vel = Vector3()
-const MAX_SPEED = 25
-const MAX_SPRINT_SPEED = 35
+const MAX_SPEED = 30
+const MAX_SPRINT_SPEED = 45
 const JUMP_SPEED = 20
 const SPRINT_ACCEL = 18
 const ACCEL = 4.5
@@ -50,6 +49,7 @@ var is_sprinting = false
 var flashlight
 
 var dir = Vector3()
+var jump_dir = Vector3()
 
 const DEACCEL = 16
 const MAX_SLOPE_ANGLE = 40
@@ -147,6 +147,8 @@ func process_input():
 	
 	dir += -cam_xform.basis.z.normalized() * input_movement_vector.y
 	dir += cam_xform.basis.x.normalized() * input_movement_vector.x
+	if is_on_floor():
+		jump_dir = dir
 	
 	#Cambio arma
 	var weapon_change_number = WEAPON_NAME_TO_NUMBER[current_weapon_name]
@@ -319,7 +321,11 @@ func process_movement(delta):
 	hvel.y = 0
 	
 	# Specifica quanto lontano andrà il giocatore nella direzione dir
-	var target = dir
+	var target
+	if is_on_floor():
+		target = dir
+	else:
+		target = jump_dir
 	if is_sprinting:
 		target *= MAX_SPRINT_SPEED
 	else:
@@ -489,6 +495,7 @@ func add_ammo(additional_ammo):
 func add_grenade(additional_grenade):
 	grenade_amounts[current_grenade] += additional_grenade
 	grenade_amounts[current_grenade] = clamp(grenade_amounts[current_grenade], 0, MAX_GRENADE)
+	
 func fire_bullet():
 	if changing_weapon == true:
 		return

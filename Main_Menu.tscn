@@ -69,6 +69,7 @@ script = ExtResource( 1 )
 testing_area_scene = "res://Testing_Area.tscn"
 space_level_scene = "res://assets/Space_Level_Objects/Space_Level.tscn"
 ruins_level_scene = "res://assets/Ruin_Level_Objects/Ruins_Level.tscn"
+prova_level_scene = "res://Prova_Level.tscn"
 
 [node name="Background_Animation" type="Spatial" parent="."]
 
@@ -252,6 +253,14 @@ margin_right = 60.0
 margin_bottom = 60.0
 texture = ExtResource( 6 )
 expand = true
+
+[node name="Button_Level_Prova" type="Button" parent="Level_Select_Menu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -71.4319
+margin_top = 609.133
+margin_right = 68.5681
+margin_bottom = 749.133
 
 [node name="Options_Menu" type="Panel" parent="."]
 editor/display_folded = true

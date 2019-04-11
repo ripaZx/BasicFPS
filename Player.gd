@@ -30,7 +30,7 @@ const GRENADE_THROW_FORCE = 50
 
 # Acchiappa oggetti
 var grabbed_object = null
-const OBJECT_THROW_FORCE = 120
+const OBJECT_THROW_FORCE = 520
 const OBJECT_GRAB_DISTANCE = 8
 const OBJECT_GRAB_RAY_DISTANCE = 10
 
@@ -230,7 +230,24 @@ func process_input():
 		is_sprinting = true
 	else:
 		is_sprinting = false
-	
+		
+	# Melee
+	if Input.is_action_just_pressed("melee"):
+		var state = get_world().direct_space_state
+		
+		var center_position = get_viewport().size / 2
+		var ray_from = camera.project_ray_origin(center_position)
+		var ray_to = ray_from + camera.project_ray_normal(center_position) * OBJECT_GRAB_RAY_DISTANCE
+		
+		var ray_result = state.intersect_ray(ray_from, ray_to, [self, $Rotation_Helper/Gun_Fire_Points/Knife_Point/Area])
+		if !ray_result.empty():
+			if ray_result["collider"] is RigidBody:
+				ray_result["collider"].apply_impulse(ray_result["normal"], -camera.global_transform.basis.z.normalized() * OBJECT_THROW_FORCE)
+			elif ray_result["collider"] is StaticBody:
+				self.move_and_slide(camera.global_transform.basis.z.normalized() * OBJECT_THROW_FORCE, Vector3(0, 1, 0), 0.05, 4, deg2rad(MAX_SLOPE_ANGLE))
+			else:
+				return
+				
 	# Salto
 	if is_on_floor():
 		if Input.is_action_pressed("movimento_salto"):

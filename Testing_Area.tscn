@@ -87,7 +87,6 @@ bounce = 0.6
 [node name="Testing_Area" type="Spatial"]
 
 [node name="Box" type="Spatial" parent="."]
-editor/display_folded = true
 
 [node name="Floor_plane" type="MeshInstance" parent="Box"]
 editor/display_folded = true

@@ -147,6 +147,11 @@ func process_input():
 	
 	dir += -cam_xform.basis.z.normalized() * input_movement_vector.y
 	dir += cam_xform.basis.x.normalized() * input_movement_vector.x
+	
+	# Normalizzo la direzione per avere consistenza nella velocità (in diagonale il giocatore sarebbe più veloce)
+	dir.y = 0
+	dir = dir.normalized()
+	
 	if is_on_floor():
 		jump_dir = dir
 	
@@ -244,7 +249,10 @@ func process_input():
 			if ray_result["collider"] is RigidBody:
 				ray_result["collider"].apply_impulse(ray_result["normal"], -camera.global_transform.basis.z.normalized() * OBJECT_THROW_FORCE)
 			elif ray_result["collider"] is StaticBody:
-				self.move_and_slide(camera.global_transform.basis.z.normalized() * OBJECT_THROW_FORCE, Vector3(0, 1, 0), 0.05, 4, deg2rad(MAX_SLOPE_ANGLE))
+				if is_on_floor():
+					dir += camera.global_transform.basis.z.normalized() * OBJECT_THROW_FORCE / 20
+				else:
+					jump_dir += camera.global_transform.basis.z.normalized() * OBJECT_THROW_FORCE / 300
 			else:
 				return
 				
@@ -327,10 +335,6 @@ func process_view_input(delta):
 # Gli input vengono applicati al KinematicBody
 func process_movement(delta):
 	
-	# Normalizzo la direzione per avere consistenza nella velocità (in diagonale il giocatore sarebbe più veloce)
-	dir.y = 0
-	dir = dir.normalized()
-	
 	# Aggiungo la gravità alla velocità verticale del giocatore
 	vel.y += delta * GRAVITY
 	
@@ -343,6 +347,7 @@ func process_movement(delta):
 		target = dir
 	else:
 		target = jump_dir
+	
 	if is_sprinting:
 		target *= MAX_SPRINT_SPEED
 	else:
@@ -350,7 +355,7 @@ func process_movement(delta):
 	
 	# Se hvel è nella stessa direzione di dir accelera, altrimenti decelera
 	var accel
-	if dir.dot(hvel) > 0:
+	if target.dot(hvel) > 0:
 		if is_sprinting:
 			accel = SPRINT_ACCEL
 		else:

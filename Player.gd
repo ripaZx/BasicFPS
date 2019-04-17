@@ -248,7 +248,7 @@ func process_input():
 		if !ray_result.empty():
 			if ray_result["collider"] is RigidBody:
 				ray_result["collider"].apply_impulse(ray_result["normal"], -camera.global_transform.basis.z.normalized() * OBJECT_THROW_FORCE)
-			elif ray_result["collider"] is StaticBody:
+			elif ray_result["collider"] is StaticBody || ray_result["collider"] is GridMap:
 				if is_on_floor():
 					dir += camera.global_transform.basis.z.normalized() * OBJECT_THROW_FORCE / 20
 				else:

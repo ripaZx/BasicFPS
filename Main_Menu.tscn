@@ -1,11 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Main_Menu.gd" type="Script" id=1]
 [ext_resource path="res://assets/lightblue_equirectangular.png" type="Texture" id=2]
 [ext_resource path="res://assets/Titillium-Regular.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://FPS_project_icon.png" type="Texture" id=4]
-[ext_resource path="res://assets/Space_Level_Objects/SpaceThumbnail.png" type="Texture" id=5]
-[ext_resource path="res://assets/Ruin_Level_Objects/RuinsThumbnail.png" type="Texture" id=6]
 
 [sub_resource type="PanoramaSky" id=1]
 radiance_size = 0
@@ -69,7 +67,7 @@ script = ExtResource( 1 )
 testing_area_scene = "res://Testing_Area.tscn"
 space_level_scene = "res://assets/Space_Level_Objects/Space_Level.tscn"
 ruins_level_scene = "res://assets/Ruin_Level_Objects/Ruins_Level.tscn"
-prova_level_scene = "res://Prova_Level.tscn"
+prova_level_scene = "res://Prova_Level/Prova_Level.tscn"
 
 [node name="Background_Animation" type="Spatial" parent="."]
 
@@ -156,7 +154,6 @@ custom_fonts/font = SubResource( 5 )
 text = "Quit"
 
 [node name="Level_Select_Menu" type="Panel" parent="."]
-editor/display_folded = true
 visible = false
 modulate = Color( 1, 1, 1, 0.901961 )
 anchor_bottom = 1.0
@@ -212,55 +209,13 @@ margin_bottom = 60.0
 texture = ExtResource( 4 )
 expand = true
 
-[node name="Button_Level_Space" type="Button" parent="Level_Select_Menu"]
-editor/display_folded = true
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -70.0
-margin_top = 275.0
-margin_right = 70.0
-margin_bottom = 415.0
-
-[node name="Icon" type="TextureRect" parent="Level_Select_Menu/Button_Level_Space"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -60.0
-margin_top = -60.0
-margin_right = 60.0
-margin_bottom = 60.0
-texture = ExtResource( 5 )
-expand = true
-
-[node name="Button_Level_Ruins" type="Button" parent="Level_Select_Menu"]
-editor/display_folded = true
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -70.0
-margin_top = 433.0
-margin_right = 70.0
-margin_bottom = 573.0
-
-[node name="Icon" type="TextureRect" parent="Level_Select_Menu/Button_Level_Ruins"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -60.0
-margin_top = -60.0
-margin_right = 60.0
-margin_bottom = 60.0
-texture = ExtResource( 6 )
-expand = true
-
 [node name="Button_Level_Prova" type="Button" parent="Level_Select_Menu"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -71.4319
-margin_top = 609.133
-margin_right = 68.5681
-margin_bottom = 749.133
+margin_left = -68.5679
+margin_top = 294.099
+margin_right = 71.4321
+margin_bottom = 434.099
 
 [node name="Options_Menu" type="Panel" parent="."]
 editor/display_folded = true

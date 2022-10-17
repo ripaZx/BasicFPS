@@ -75,7 +75,7 @@ prova_level_scene = "res://Prova_Level/Prova_Level.tscn"
 environment = SubResource( 2 )
 
 [node name="Main_Menu_Camera" type="Camera" parent="Background_Animation"]
-transform = Transform( 1, -1.74846e-007, 1.74846e-007, 1.74846e-007, 1, -1.74846e-007, -1.74846e-007, 1.74846e-007, 1, 0, 0, 0 )
+transform = Transform( 1, -1.74846e-07, 1.74846e-07, 1.74846e-07, 1, -1.74846e-07, -1.74846e-07, 1.74846e-07, 1, 0, 0, 0 )
 
 [node name="Animation_Player" type="AnimationPlayer" parent="Background_Animation"]
 autoplay = "Background_Animation"
@@ -86,9 +86,7 @@ anims/Background_Animation = SubResource( 3 )
 modulate = Color( 1, 1, 1, 0.901961 )
 anchor_bottom = 1.0
 margin_right = 335.0
-custom_styles/panelf = SubResource( 4 )
 custom_styles/panel = SubResource( 4 )
-custom_styles/panelnc = SubResource( 4 )
 
 [node name="Title_Label" type="Label" parent="Start_Menu"]
 margin_left = 20.0
@@ -96,10 +94,10 @@ margin_top = 10.0
 margin_right = 227.0
 margin_bottom = 77.0
 rect_scale = Vector2( 1.4, 1.4 )
-custom_fonts/font = SubResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
 custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 5 )
 text = "Godot 3
 FPS Tutorial"
 align = 1
@@ -158,9 +156,7 @@ visible = false
 modulate = Color( 1, 1, 1, 0.901961 )
 anchor_bottom = 1.0
 margin_right = 334.0
-custom_styles/panelf = SubResource( 4 )
 custom_styles/panel = SubResource( 4 )
-custom_styles/panelnc = SubResource( 4 )
 
 [node name="Title_Label" type="Label" parent="Level_Select_Menu"]
 margin_left = 20.0
@@ -168,10 +164,10 @@ margin_top = 10.0
 margin_right = 227.0
 margin_bottom = 77.0
 rect_scale = Vector2( 1.4, 1.4 )
-custom_fonts/font = SubResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
 custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 5 )
 text = "Select a level"
 align = 1
 valign = 1
@@ -189,7 +185,6 @@ custom_fonts/font = SubResource( 5 )
 text = "Back"
 
 [node name="Button_Level_Testing_Area" type="Button" parent="Level_Select_Menu"]
-editor/display_folded = true
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -70.0
@@ -218,14 +213,11 @@ margin_right = 71.4321
 margin_bottom = 434.099
 
 [node name="Options_Menu" type="Panel" parent="."]
-editor/display_folded = true
 visible = false
 modulate = Color( 1, 1, 1, 0.901961 )
 anchor_bottom = 1.0
 margin_right = 338.0
-custom_styles/panelf = SubResource( 4 )
 custom_styles/panel = SubResource( 4 )
-custom_styles/panelnc = SubResource( 4 )
 
 [node name="Title_Label" type="Label" parent="Options_Menu"]
 margin_left = 20.0
@@ -233,10 +225,10 @@ margin_top = 10.0
 margin_right = 227.0
 margin_bottom = 53.0
 rect_scale = Vector2( 1.4, 1.4 )
-custom_fonts/font = SubResource( 5 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 3
 custom_constants/shadow_offset_y = 3
+custom_fonts/font = SubResource( 5 )
 text = "Options"
 align = 1
 valign = 1
@@ -328,4 +320,3 @@ margin_right = 155.0
 margin_bottom = -20.0
 custom_fonts/font = SubResource( 5 )
 text = "Back"
-

@@ -33,11 +33,10 @@ func collided_with_body(body):
 	if body == self:
 		return
 		
-	if player_body != null:
-		if body == player_body:
-			return
+	if player_body != null and body == player_body:
+		return
 	
-	if attached == false:
+	if !attached:
 		attached = true
 		attach_point = Spatial.new()
 		body.add_child(attach_point)
@@ -48,9 +47,8 @@ func collided_with_body(body):
 		mode = RigidBody.MODE_STATIC
 	
 func _process(delta):
-	if attached == true:
-		if attach_point != null:
-			global_transform.origin = attach_point.global_transform.origin
+	if attached and attach_point != null:
+		global_transform.origin = attach_point.global_transform.origin
 		
 	if grenade_timer < GRENADE_TIME:
 		grenade_timer += delta
@@ -71,7 +69,6 @@ func _process(delta):
 		if explosion_wait_timer <= EXPLOSION_WAIT_TIME:
 			explosion_wait_timer += delta
 			
-			if explosion_wait_timer > EXPLOSION_WAIT_TIME:
-				if attach_point != null:
-					attach_point.queue_free()
-				queue_free()
+			if explosion_wait_timer > EXPLOSION_WAIT_TIME and attach_point != null:
+				attach_point.queue_free()
+			queue_free()

@@ -49,9 +49,8 @@ func equip_weapon():
 	
 func unequip_weapon():
 	
-	if player_node.animation_manager.current_state == IDLE_ANIM_NAME:
-		if player_node.animation_manager.current_state != "Rifle_unequip":
-			player_node.animation_manager.set_animation("Rifle_unequip")
+	if player_node.animation_manager.current_state == IDLE_ANIM_NAME and player_node.animation_manager.current_state != "Rifle_unequip":
+		player_node.animation_manager.set_animation("Rifle_unequip")
 			
 	if player_node.animation_manager.current_state == "Idle_unarmed":
 		is_weapon_enabled = false
@@ -68,7 +67,7 @@ func reload_weapon():
 	if spare_ammo <= 0 or ammo_in_weapon == AMMO_IN_MAG:
 		can_reload = false
 		
-	if can_reload == true:
+	if can_reload:
 		var ammo_needed = AMMO_IN_MAG - ammo_in_weapon
 		
 		if spare_ammo >= ammo_needed:

@@ -61,14 +61,12 @@ func _ready():
 	
 func _physics_process(delta):
 	
-	if is_active == true:
+	if is_active and flash_timer > 0:
+		flash_timer -= delta
 		
-		if flash_timer > 0:
-			flash_timer -= delta
-			
-			if flash_timer <= 0:
-				node_flash_one.visible = false
-				node_flash_two.visible = false
+		if flash_timer <= 0:
+			node_flash_one.visible = false
+			node_flash_two.visible = false
 		
 		if current_target != null:
 			node_turret_head.look_at(current_target.global_transform.origin + Vector3(0, PLAYER_HEIGHT, 0), Vector3(0, 1, 0))
@@ -95,7 +93,7 @@ func _physics_process(delta):
 	
 func fire_bullet():
 	
-	if use_raycast == true:
+	if use_raycast:
 		node_raycast.look_at(current_target.global_transform.origin + Vector3(0, PLAYER_HEIGHT, 0), Vector3(0, 1, 0))
 		
 		node_raycast.force_raycast_update()
@@ -135,15 +133,14 @@ func body_entered_vision(body):
 			is_active = true
 	
 func body_exited_vision(body):
-	if current_target != null:
-		if body == current_target:
-			current_target = null
-			is_active = false
-			
-			flash_timer = 0
-			fire_timer = 0
-			node_flash_one.visible = false
-			node_flash_two.visible = false
+	if current_target != null and body == current_target:
+		current_target = null
+		is_active = false
+		
+		flash_timer = 0
+		fire_timer = 0
+		node_flash_one.visible = false
+		node_flash_two.visible = false
 	
 func bullet_hit(damage, bullet_hit_pos):
 	turret_health -= damage

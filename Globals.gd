@@ -54,14 +54,12 @@ func load_new_scene(new_scene_path):
 	created_audio.clear()
 	
 func set_debug_display(display_on):
-	if display_on == false:
-		if debug_display != null:
-			debug_display.queue_free()
-			debug_display = null
-	else:
-		if debug_display == null:
-			debug_display = DEBUG_DISPLAY_SCENE.instance()
-			canvas_layer.add_child(debug_display)
+	if !display_on and debug_display != null:
+		debug_display.queue_free()
+		debug_display = null
+	elif debug_display == null:
+		debug_display = DEBUG_DISPLAY_SCENE.instance()
+		canvas_layer.add_child(debug_display)
 	
 func popup_closed():
 	get_tree().paused = false

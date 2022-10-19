@@ -174,30 +174,24 @@ func process_input():
 		
 	weapon_change_number = clamp(weapon_change_number, 0, WEAPON_NUMBER_TO_NAME.size() -1)
 	
-	if changing_weapon == false:
-		if reloading_weapon == false:
-			if WEAPON_NUMBER_TO_NAME[weapon_change_number] != current_weapon_name:
-				changing_weapon_name = WEAPON_NUMBER_TO_NAME[weapon_change_number]
-				changing_weapon = true
-				
+	if !changing_weapon and !reloading_weapon and WEAPON_NUMBER_TO_NAME[weapon_change_number] != current_weapon_name:
+		changing_weapon_name = WEAPON_NUMBER_TO_NAME[weapon_change_number]
+		changing_weapon = true
+		
 	mouse_scroll_value = weapon_change_number
 	
 	# Ricarica
-	if reloading_weapon == false:
-		if changing_weapon == false:
-			if Input.is_action_pressed("ricarica"):
-				var current_weapon = weapons[current_weapon_name]
-				if current_weapon != null:
-					if current_weapon.CAN_RELOAD == true:
-						var current_anim_state = animation_manager.current_state
-						var is_reloading = false
-						for weapon in weapons:
-							var weapon_node = weapons[weapon]
-							if weapon_node != null:
-								if current_anim_state == weapon_node.RELOADING_ANIM_NAME:
-									is_reloading = true
-						if is_reloading == false:
-							reloading_weapon = true
+	if !reloading_weapon and !changing_weapon and Input.is_action_pressed("ricarica"):
+		var current_weapon = weapons[current_weapon_name]
+		if current_weapon != null and current_weapon.CAN_RELOAD:
+			var current_anim_state = animation_manager.current_state
+			var is_reloading = false
+			for weapon in weapons:
+				var weapon_node = weapons[weapon]
+				if weapon_node != null and current_anim_state == weapon_node.RELOADING_ANIM_NAME:
+					is_reloading = true
+			if !is_reloading:
+				reloading_weapon = true
 	
 	# Prendere e tirare oggetti
 	if Input.is_action_just_pressed("fuoco") and current_weapon_name == "DISARMATO":
@@ -209,14 +203,13 @@ func process_input():
 			var ray_to = ray_from + camera.project_ray_normal(center_position) * OBJECT_GRAB_RAY_DISTANCE
 			
 			var ray_result = state.intersect_ray(ray_from, ray_to, [self, $Rotation_Helper/Gun_Fire_Points/Knife_Point/Area])
-			if !ray_result.empty():
-				if ray_result["collider"] is RigidBody:
-					grabbed_object = ray_result["collider"]
-					grabbed_object.mode = RigidBody.MODE_STATIC
-					
-					grabbed_object.collision_layer = 0
-					grabbed_object.collision_mask = 0
-					
+			if !ray_result.empty() and ray_result["collider"] is RigidBody:
+				grabbed_object = ray_result["collider"]
+				grabbed_object.mode = RigidBody.MODE_STATIC
+				
+				grabbed_object.collision_layer = 0
+				grabbed_object.collision_mask = 0
+				
 		else:
 			grabbed_object.mode = RigidBody.MODE_RIGID
 			
@@ -263,13 +256,10 @@ func process_input():
 	
 	# Sparare
 	if Input.is_action_pressed("fuoco"):
-		if reloading_weapon == false:
-			if changing_weapon == false:
-				var current_weapon = weapons[current_weapon_name]
-				if current_weapon != null:
-					if current_weapon.ammo_in_weapon > 0:
-						if animation_manager.current_state == current_weapon.IDLE_ANIM_NAME:
-							animation_manager.set_animation(current_weapon.FIRE_ANIM_NAME)
+		if !reloading_weapon and !changing_weapon:
+			var current_weapon = weapons[current_weapon_name]
+			if current_weapon != null and current_weapon.ammo_in_weapon > 0 and animation_manager.current_state == current_weapon.IDLE_ANIM_NAME:
+				animation_manager.set_animation(current_weapon.FIRE_ANIM_NAME)
 	
 	# Cambio granate e lancio
 	if Input.is_action_just_pressed("cambio_granata"):
@@ -370,7 +360,7 @@ func process_movement(delta):
 	vel = move_and_slide(vel, Vector3(0, 1, 0), 0.05, 4, deg2rad(MAX_SLOPE_ANGLE))
 	
 func process_changing_weapons(delta):
-	if changing_weapon == true:
+	if changing_weapon:
 		
 		var weapon_unequipped = false
 		var current_weapon = weapons[current_weapon_name]
@@ -378,12 +368,12 @@ func process_changing_weapons(delta):
 		if current_weapon == null:
 			weapon_unequipped = true
 		else:
-			if current_weapon.is_weapon_enabled == true:
+			if current_weapon.is_weapon_enabled:
 				weapon_unequipped = current_weapon.unequip_weapon()
 			else:
 				weapon_unequipped = true
 				
-		if weapon_unequipped == true:
+		if weapon_unequipped:
 			
 			var weapon_equipped = false
 			var weapon_to_equip = weapons[changing_weapon_name]
@@ -391,18 +381,18 @@ func process_changing_weapons(delta):
 			if weapon_to_equip == null:
 				weapon_equipped = true
 			else:
-				if weapon_to_equip.is_weapon_enabled == false:
+				if !weapon_to_equip.is_weapon_enabled:
 					weapon_equipped = weapon_to_equip.equip_weapon()
 				else:
 					weapon_equipped = true
 					
-			if weapon_equipped == true:
+			if weapon_equipped:
 				changing_weapon = false
 				current_weapon_name = changing_weapon_name
 				changing_weapon_name = ""
 	
 func process_reloading(delta):
-	if reloading_weapon == true:
+	if reloading_weapon:
 		var current_weapon = weapons[current_weapon_name]
 		if current_weapon != null:
 			current_weapon.reload_weapon()
@@ -484,13 +474,12 @@ func _input(event):
 				
 			mouse_scroll_value = clamp(mouse_scroll_value, 0, WEAPON_NUMBER_TO_NAME.size() -1)
 			
-			if changing_weapon == false:
-				if reloading_weapon == false:
-					var round_mouse_scroll_value = int(round(mouse_scroll_value))
-					if WEAPON_NUMBER_TO_NAME[round_mouse_scroll_value] != current_weapon_name:
-						changing_weapon_name = WEAPON_NUMBER_TO_NAME[round_mouse_scroll_value]
-						changing_weapon = true
-						mouse_scroll_value = round_mouse_scroll_value
+			if !changing_weapon and !reloading_weapon:
+				var round_mouse_scroll_value = int(round(mouse_scroll_value))
+				if WEAPON_NUMBER_TO_NAME[round_mouse_scroll_value] != current_weapon_name:
+					changing_weapon_name = WEAPON_NUMBER_TO_NAME[round_mouse_scroll_value]
+					changing_weapon = true
+					mouse_scroll_value = round_mouse_scroll_value
 	
 	# Gestione della rotazione del mouse (rotea la camera per le rotazioni verticali e il giocatore per quelle orizzontali)
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
@@ -510,16 +499,15 @@ func add_health(additional_health):
 	health = clamp(health, 0, MAX_HEALTH)
 	
 func add_ammo(additional_ammo):
-	if (current_weapon_name != "DISARMATO"):
-		if (weapons[current_weapon_name].CAN_REFILL == true):
-			weapons[current_weapon_name].spare_ammo += weapons[current_weapon_name].AMMO_IN_MAG * additional_ammo
+	if current_weapon_name != "DISARMATO" and weapons[current_weapon_name].CAN_REFILL:
+		weapons[current_weapon_name].spare_ammo += weapons[current_weapon_name].AMMO_IN_MAG * additional_ammo
 	
 func add_grenade(additional_grenade):
 	grenade_amounts[current_grenade] += additional_grenade
 	grenade_amounts[current_grenade] = clamp(grenade_amounts[current_grenade], 0, MAX_GRENADE)
 	
 func fire_bullet():
-	if changing_weapon == true:
+	if changing_weapon:
 		return
 		
 	weapons[current_weapon_name].fire_weapon()

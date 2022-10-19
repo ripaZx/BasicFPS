@@ -15,12 +15,12 @@ _global_script_class_icons={
 [application]
 
 config/name="FPSBaseGame"
-run/main_scene="res://Main_Menu.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://Scenes/Main_Menu.tscn"
+config/icon="res://assets/icon.png"
 
 [autoload]
 
-Globals="*res://Globals.gd"
+Globals="*res://Scripts/Globals.gd"
 
 [display]
 

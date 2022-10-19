@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Target.gd" type="Script" id=1]
-[ext_resource path="res://Broken_Target.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Target.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Broken_Target.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Gamemode_Objects/Metal_Two.material" type="Material" id=3]
 [ext_resource path="res://assets/Gamemode_Objects/Emissive_Orange.material" type="Material" id=4]
 

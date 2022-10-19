@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Sticky_Grenade.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Sticky_Grenade.gd" type="Script" id=1]
 [ext_resource path="res://assets/StickyGrenade.scn" type="PackedScene" id=2]
 
 [sub_resource type="ConvexPolygonShape" id=1]
@@ -15,7 +15,7 @@ emission_sphere_radius = 0.1
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 1.85
-angular_velocity = 2.8026e-044
+angular_velocity = 2.8026e-44
 damping = 0.75
 
 [sub_resource type="SpatialMaterial" id=4]
@@ -79,4 +79,3 @@ draw_pass_2 = SubResource( 7 )
 [node name="Collision_Shape" type="CollisionShape" parent="Sticky_Area"]
 transform = Transform( 2.4, 0, 0, 0, 2.4, 0, 0, 0, 2.4, 0, 0, 0 )
 shape = SubResource( 1 )
-

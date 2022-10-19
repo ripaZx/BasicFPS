@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Debug_Display.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Debug_Display.gd" type="Script" id=1]
 
 [node name="Debug_Display" type="Control"]
 modulate = Color( 1, 1, 1, 0.784314 )
@@ -37,4 +37,3 @@ margin_top = 50.0
 margin_right = -5.0
 margin_bottom = 70.0
 text = "Godot version:"
-

@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Ammo_Pickup.gd" type="Script" id=1]
-[ext_resource path="res://assets/Gamemode_Objects/Metal_Two.material" type="Material" id=2]
-[ext_resource path="res://assets/Gamemode_Objects/Metal_Three.material" type="Material" id=3]
-[ext_resource path="res://assets/Gamemode_Objects/Metal_One.material" type="Material" id=4]
+[ext_resource path="res://Scripts/Ammo_Pickup.gd" type="Script" id=1]
+[ext_resource path="res://assets/Gamemode_Objects/Metal_Three.material" type="Material" id=2]
+[ext_resource path="res://assets/Gamemode_Objects/Metal_One.material" type="Material" id=3]
+[ext_resource path="res://assets/Gamemode_Objects/Metal_Two.material" type="Material" id=4]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Cube.057"
@@ -14,7 +14,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98071,
 "index_count": 906,
-"material": ExtResource( 2 ),
+"material": ExtResource( 4 ),
 "name": "Metal_Two",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -27,7 +27,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 98071,
 "index_count": 990,
-"material": ExtResource( 3 ),
+"material": ExtResource( 2 ),
 "name": "Metal_Three",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -40,7 +40,7 @@ surfaces/2 = {
 "blend_shape_data": [  ],
 "format": 98071,
 "index_count": 492,
-"material": ExtResource( 4 ),
+"material": ExtResource( 3 ),
 "name": "Metal_One",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -56,7 +56,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 98071,
 "index_count": 54,
-"material": ExtResource( 2 ),
+"material": ExtResource( 4 ),
 "name": "Metal_Two",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -69,7 +69,7 @@ surfaces/1 = {
 "blend_shape_data": [  ],
 "format": 98071,
 "index_count": 270,
-"material": ExtResource( 3 ),
+"material": ExtResource( 2 ),
 "name": "Metal_Three",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -82,7 +82,7 @@ surfaces/2 = {
 "blend_shape_data": [  ],
 "format": 98071,
 "index_count": 84,
-"material": ExtResource( 4 ),
+"material": ExtResource( 3 ),
 "name": "Metal_One",
 "primitive": 4,
 "skeleton_aabb": [  ],
@@ -132,18 +132,12 @@ script = ExtResource( 1 )
 
 [node name="Ammo_Box" type="MeshInstance" parent="Holder/Ammo_Kit"]
 mesh = SubResource( 1 )
-material/0 = null
-material/1 = null
-material/2 = null
 
 [node name="Ammo_Kit_Small" type="Spatial" parent="Holder"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.449994, 0 )
 
 [node name="Ammo_Box_Small" type="MeshInstance" parent="Holder/Ammo_Kit_Small"]
 mesh = SubResource( 2 )
-material/0 = null
-material/1 = null
-material/2 = null
 
 [node name="Ammo_Pickup_Trigger" type="Area" parent="Holder"]
 
@@ -159,4 +153,3 @@ disabled = true
 [node name="Animation_Player" type="AnimationPlayer" parent="."]
 autoplay = "Ammo_Anim"
 anims/Ammo_Anim = SubResource( 5 )
-

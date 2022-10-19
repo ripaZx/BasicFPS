@@ -24,8 +24,8 @@ var reloading_weapon = false
 var grenade_amounts = {"Grenade":2, "Sticky Grenade": 2}
 const MAX_GRENADE = 5
 var current_grenade = "Grenade"
-var grenade_scene = preload("res://Grenade.tscn")
-var sticky_grenade_scene = preload("res://Sticky_Grenade.tscn")
+var grenade_scene = preload("res://Scenes/Grenade.tscn")
+var sticky_grenade_scene = preload("res://Scenes/Sticky_Grenade.tscn")
 const GRENADE_THROW_FORCE = 50
 
 # Acchiappa oggetti

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Prova_Level/Prova_Level_Library.tres" type="MeshLibrary" id=2]
 
 [sub_resource type="ProceduralSky" id=1]

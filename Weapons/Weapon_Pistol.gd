@@ -15,7 +15,7 @@ const CAN_REFILL = true
 
 const RELOADING_ANIM_NAME = "Pistol_reload"
 
-var bullet_scene = preload("res://Scenes/Bullet_Scene.tscn")
+var bullet_scene = preload("res://Weapons/Bullet_Scene.tscn")
 
 var player_node = null
 

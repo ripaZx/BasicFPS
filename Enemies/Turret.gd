@@ -35,7 +35,7 @@ const MAX_TURRET_HEALTH = 60
 const DESTROYED_TIME = 20
 var destroyed_timer = 0
 
-var bullet_scene = preload("res://Scenes/Bullet_Scene.tscn")
+var bullet_scene = preload("res://Weapons/Bullet_Scene.tscn")
 
 func _ready():
 	$Vision_Area.connect("body_entered", self, "body_entered_vision")

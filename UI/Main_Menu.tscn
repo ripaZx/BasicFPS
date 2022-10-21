@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Scripts/Main_Menu.gd" type="Script" id=1]
-[ext_resource path="res://assets/lightblue_equirectangular.png" type="Texture" id=2]
+[ext_resource path="res://assets/lightblue_equirectangular.png" type="Texture" id=1]
+[ext_resource path="res://assets/FPS_project_icon.png" type="Texture" id=2]
 [ext_resource path="res://assets/Titillium-Regular.otf" type="DynamicFontData" id=3]
-[ext_resource path="res://assets/FPS_project_icon.png" type="Texture" id=4]
+[ext_resource path="res://UI/Main_Menu.gd" type="Script" id=4]
 
 [sub_resource type="PanoramaSky" id=1]
 radiance_size = 0
-panorama = ExtResource( 2 )
+panorama = ExtResource( 1 )
 
 [sub_resource type="Environment" id=2]
 background_mode = 2
@@ -63,8 +63,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -1.0
 margin_right = -1.0
-script = ExtResource( 1 )
-testing_area_scene = "res://Scenes/Testing_Area.tscn"
+script = ExtResource( 4 )
+testing_area_scene = "res://Prova_Level/Testing_Area.tscn"
 space_level_scene = "res://assets/Space_Level_Objects/Space_Level.tscn"
 ruins_level_scene = "res://assets/Ruin_Level_Objects/Ruins_Level.tscn"
 prova_level_scene = "res://Prova_Level/Prova_Level.tscn"
@@ -201,7 +201,7 @@ margin_left = -60.0
 margin_top = -60.0
 margin_right = 60.0
 margin_bottom = 60.0
-texture = ExtResource( 4 )
+texture = ExtResource( 2 )
 expand = true
 
 [node name="Button_Level_Prova" type="Button" parent="Level_Select_Menu"]

@@ -9,18 +9,18 @@ var audio_clips = {
 	"Gun_cock": preload("res://assets/Audio/gun_cock.wav")
 }
 
-const SIMPLE_AUDIO_PLAYER_SCENE = preload("res://Scenes/Simple_Audio_Player.tscn")
+const SIMPLE_AUDIO_PLAYER_SCENE = preload("res://Globals/Simple_Audio_Player.tscn")
 var created_audio = []
 
 var respawn_points = null
 
-const MAIN_MENU_PATH = "res://Scenes/Main_Menu.tscn"
-const POPUP_SCENE = preload("res://Scenes/Pause_Popup.tscn")
+const MAIN_MENU_PATH = "res://UI/Main_Menu.tscn"
+const POPUP_SCENE = preload("res://UI/Pause_Popup.tscn")
 var popup = null
 
 var canvas_layer = null
 
-const DEBUG_DISPLAY_SCENE = preload("res://Scenes/Debug_Display.tscn")
+const DEBUG_DISPLAY_SCENE = preload("res://UI/Debug_Display.tscn")
 var debug_display = null
 
 func _ready():
